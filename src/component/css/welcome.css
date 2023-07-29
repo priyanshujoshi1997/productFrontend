@@ -1,0 +1,47 @@
+.div_body{
+    background-image: url("../../../public/static/images/1.jpg");
+    background-color: rgba(22, 22, 22, 0.822);
+    min-height: 100vh;
+}
+
+.link_container{
+    margin-left: 30%;
+}
+.link_container a{
+   
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.h1_style{
+    font-style: italic;
+    color: aliceblue;
+    font-family: sans-serif;
+}
+.link_container a{
+    text-decoration: none;
+    color: white;
+}
+.btn_div{
+    margin-left: 44%;
+}
+.btn_review{
+    font-size: 16px;
+    padding: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.video_container{
+    margin-left: 39%;  
+}
+
+.responsive-iframe {
+    position: absolute;
+    top: 35%;
+    left: 26%;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    height: 50%;
+    border: none;
+  }
