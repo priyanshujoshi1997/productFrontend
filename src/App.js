@@ -11,16 +11,17 @@ import Profile from "./component/profile";
 import Welcome from "./component/welcome";
 import Login from "./component/login";
 import Video from "./component/video";
+import LaptopFrame from "./component/text";
+import Landing from "./component/landingpage";
 
 
 const App = () => {
   return (
     <div className="App">
-     
+      {/* <Welcome></Welcome> */}
        <StyledEngineProvider injectFirst>
        <Routes> 
             <Route path="/" element={<Welcome/> } /> 
-            {/* <Route path="/home" element={<Home></Home>}></Route> */}
             <Route path="/profile" element={<Profile/> } /> 
             <Route path="/login" element={<Login/>}/>
             <Route path="/catalogue" element={<Catalogue></Catalogue>}></Route>

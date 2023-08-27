@@ -1,0 +1,30 @@
+/* App.css */
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/public/static/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.5; /* Adjust as needed */
+  }
+  
+  .content {
+    z-index: 1;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust as needed */
+    border-radius: 8px;
+  }
+  
