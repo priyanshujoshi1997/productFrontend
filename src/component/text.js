@@ -1,6 +1,6 @@
 import React from "react";
 import ReactPlayer from 'react-player';
-import ".//css/test.css"
+import ".//css/laptopframe.css"
 function LaptopFrame(){
     return (
         <div className="app">

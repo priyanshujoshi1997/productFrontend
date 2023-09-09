@@ -1,0 +1,34 @@
+.app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .laptop-frame {
+    position: relative;
+    max-width: 800px;
+  }
+  
+  .video-container {
+    position: absolute;
+    top: 70px; /* Adjust this value to properly position the video within the laptop frame */
+    left: 105px; /* Adjust this value to properly position the video within the laptop frame */
+    width: 590px; /* Adjust this value to match your laptop frame image's screen size */
+    height: 330px; /* Adjust this value to match your laptop frame image's screen size */
+    overflow: hidden;
+  }
+  
+  /* Style the laptop frame image if needed */
+  .laptop-frame img {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Center the video within the laptop frame */
+  .video-react {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }

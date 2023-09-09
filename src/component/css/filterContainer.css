@@ -1,0 +1,14 @@
+/* App.css */
+
+/* .filter-container {
+   //// max-height: 400px; 
+    overflow-y: auto;
+  } */
+  
+  .filter {
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    background-color: #fff;
+  }
+  

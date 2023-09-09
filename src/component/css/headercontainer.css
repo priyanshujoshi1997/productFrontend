@@ -1,0 +1,13 @@
+.btn_container{
+    display: flex;
+    width: 35%;
+    justify-content: space-between;
+    padding: 25px 0px 0px 0px;
+}
+span{
+    padding: 5px;
+   
+}
+.span_conatiner{
+    margin-top: 10px;;
+}
