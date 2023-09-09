@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import {  Button } from "@mui/material";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -11,110 +11,96 @@ import VideoGrid from "./videogrid.js"
 import Search from "./search.js";
 import FilterDisplay from "./filterDisplay.js";
 import HeaderContainer from "./headercontainer.js";
+import CountryFilter from './filterCountry.js';
+import ExpertFilter from './filterExpert.js';
+import ParameterFilter from './filterParameter.js';
+import axios from "axios";
 function Catalogue() {
-  const allvideos = [
-    {
-      country:'usa',
-      parameter:1,
-      expert:'expert A',
-      source: 'https://www.youtube.com/embed/h_JcE0yHkDo?si=Ri24VqhRozMnfasS',
-      thumbnail: 'https://example.com/thumbnail1.jpg',
-    },
-    {
-      country:'usa',
-      parameter:2,
-      expert:'expert A',
-      source: 'https://www.youtube.com/embed/h_JcE0yHkDo?si=Ri24VqhRozMnfasS',
-      thumbnail: 'https://example.com/thumbnail2.jpg',
-    },
-    {
-      country:'usa',
-      parameter:3,
-      expert:'expert A',
-      source: 'https://www.youtube.com/embed/h_JcE0yHkDo?si=Ri24VqhRozMnfasS',
-      thumbnail: 'https://example.com/thumbnail2.jpg',
-    },
-    {
-      country:'uk',
-      parameter:1,
-      expert:'expert B',
-      source: 'https://www.youtube.com/embed/h_JcE0yHkDo?si=Ri24VqhRozMnfasS',
-      thumbnail: 'https://example.com/thumbnail2.jpg',
-    },
-    {
-      country:'france',
-      parameter:2,
-      expert:'expert C',
-      source: 'https://www.youtube.com/embed/h_JcE0yHkDo?si=Ri24VqhRozMnfasS',
-      thumbnail: 'https://example.com/thumbnail2.jpg',
-    },
-    {
-      country:'usa',
-      parameter:2,
-      expert:'expert A',
-      source: 'https://www.youtube.com/embed/h_JcE0yHkDo?si=Ri24VqhRozMnfasS',
-      thumbnail: 'https://example.com/thumbnail2.jpg',
-    },
-    {
-      country:'uk',
-      parameter:3,
-      expert:'expert B',
-      source: 'https://www.youtube.com/embed/h_JcE0yHkDo?si=Ri24VqhRozMnfasS',
-      thumbnail: 'https://example.com/thumbnail2.jpg',
-    },
-    {
-      country:'france',
-      parameter:3,
-      expert:'expert D',
-      source: 'https://www.youtube.com/embed/h_JcE0yHkDo?si=Ri24VqhRozMnfasS',
-      thumbnail: 'https://example.com/thumbnail2.jpg',
-    },
-    {
-      country:'us',
-      parameter:3,
-      expert:'expert A',
-      source: 'https://www.youtube.com/embed/h_JcE0yHkDo?si=Ri24VqhRozMnfasS',
-      thumbnail: 'https://example.com/thumbnail2.jpg',
-    },
-    {
-      country:'uk',
-      parameter:6,
-      expert:'expert B',
-      source: 'https://www.youtube.com/embed/h_JcE0yHkDo?si=Ri24VqhRozMnfasS',
-      thumbnail: 'https://example.com/thumbnail2.jpg',
-    },
-    {
-      country:'uk',
-      parameter:5,
-      expert:'expert B',
-      source: 'https://www.youtube.com/embed/h_JcE0yHkDo?si=Ri24VqhRozMnfasS',
-      thumbnail: 'https://example.com/thumbnail2.jpg',
-    },{
-      country:'uk',
-      parameter:5,
-      expert:'expert B',
-      source: 'https://www.youtube.com/embed/h_JcE0yHkDo?si=Ri24VqhRozMnfasS',
-      thumbnail: 'https://example.com/thumbnail2.jpg',
-    },
-    // Add more video data here
-  ];
-  const[filterapply,setFilterApply]=useState(false)
-  const[filterVideos,setFilterVideos]=useState([])
-  const handleFilterChange = (filter) => {
-    setFilterVideos(allvideos.filter((item) => filter["countries"].includes(item.country))
-                   ||allvideos.filter((item) => filter["parameters"].includes(item.parameter))
-                   ||allvideos.filter((item) => filter["experts"].includes(item.expert)))                                              
-    setFilterApply(true)
-    getFilteredVideo()
-  };
+  
+  const[videos,setvideos]=useState([])
+  const [selectedFilters, setSelectedFilters] = useState({
+    experts: [],
+    parameters: [],
+    countries: [],
+  });
 
-  const getFilteredVideo = function(){
-    if(filterapply && filterVideos.length>0){
-      return  <VideoGrid videos={filterVideos}></VideoGrid>
+
+  useEffect(()=>{
+    const url ="https://dummy-project.onrender.com/api/v1/catalogue/videos"
+    const body={filter:selectedFilters}
+    axios({
+      method: 'post',
+      headers: { 'withCredentials': false },
+      url: url,
+      data: body
+    }).then((response)=>{
+      setvideos(response.data.data)
+    }).catch((error)=>{
+      console.log(error)
+      setvideos([])
+    })
+  },[selectedFilters])
+  
+
+  const handleCountryFilterChange = (selectedCountries) => {
+    let c=0;
+    for (const [key, value] of Object.entries(selectedCountries)) {
+      if(value){
+        c++;
+        setSelectedFilters((selectedFilters) => ({
+          ...selectedFilters,
+          countries:[... new Set([...selectedFilters.countries, key])] ,
+        }));
+        console.log(JSON.stringify(selectedFilters))
+      }else{
+        selectedFilters.countries.pop()
+      }
+      if(c==0){
+        setSelectedFilters({
+          experts: [],
+          parameters: [],
+          countries: [],
+        })
+      }
+
+      // if(value==false){
+      //   console.log("false wala",value,key)
+      // selectedFilters.countries=selectedFilters.countries.filter((item)=>item!==key)
+      // console.log("false false",selectedFilters)
+      // setSelectedFilters(selectedFilters)
+      // }
+
+      // if(Object.keys(selectedCountries).length===0){
+      //   setSelectedFilters(selectedFilters);
+      // }
     }
-    return  <VideoGrid videos={allvideos}></VideoGrid>
-    
-  }
+    console.log(JSON.stringify(selectedFilters))
+  };
+  const handleParameterChange=(selectedParameters)=>{
+    for (const [key, value] of Object.entries(selectedParameters)) {
+      if (value) {
+        setSelectedFilters((selectedFilters) => ({
+          ...selectedFilters,
+          parameters: [... new Set([...selectedFilters.parameters, key])],
+        }));
+      }
+     
+    }
+    console.log("selected "+JSON.stringify(selectedFilters))  
+  };
+  const handleExpertChange=(selectedExperts)=>{
+    for (const [key, value] of Object.entries(selectedExperts)) {
+      if (value) {
+        
+        setSelectedFilters((selectedFilters) => ({
+          ...selectedFilters,
+          experts: [... new Set([...selectedFilters.experts, key])],
+        }));
+      }
+    }
+  };
+  
+  console.log("hello"+videos);
     return (
         
         <div className="catalogue_conatiner">   
@@ -128,7 +114,9 @@ function Catalogue() {
                 <CardContent style={{padding:2}}>
                     <Grid>
                         <div id="video_list"> 
-                        <FilterContainer onFilterChange={handleFilterChange} />
+                        <ParameterFilter onParameterFilterChange={handleParameterChange} />
+                        <CountryFilter onCountryFilterChange={handleCountryFilterChange} />
+                        <ExpertFilter onExpertFilterChange={handleExpertChange}> </ExpertFilter>
                         </div>
                     
                 </Grid>
@@ -146,8 +134,7 @@ function Catalogue() {
           <Card>
                 <CardContent style={{padding:5}}>
                       <Grid>
-                       { getFilteredVideo()}
-                        {/* <VideoGrid videos={allvideos}></VideoGrid> */}
+                        {<VideoGrid videos={videos}></VideoGrid>}
                       </Grid>
                 </CardContent>
             </Card>

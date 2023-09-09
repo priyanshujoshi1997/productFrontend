@@ -14,6 +14,12 @@ function CountryFilter({ onCountryFilterChange }) {
 
   const handleCountryChange = (country) => {
     const updatedCountries = { ...selectedCountries, [country]: !selectedCountries[country] };
+    let obj={}
+    for(let itr in updatedCountries){
+      if(updatedCountries[itr]==true){
+        obj ={...obj,[itr]: updatedCountries[itr]}
+      }
+    }
     setSelectedCountries(updatedCountries);
     onCountryFilterChange(updatedCountries);
   };

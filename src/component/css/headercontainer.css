@@ -1,8 +1,12 @@
 .btn_container{
     display: flex;
     width: 35%;
+    margin: 0;
     justify-content: space-between;
     padding: 25px 0px 0px 0px;
+}
+.btn_container button{
+    padding: auto;
 }
 span{
     padding: 5px;

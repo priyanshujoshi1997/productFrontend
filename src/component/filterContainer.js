@@ -12,7 +12,6 @@ function FilterContainer({onFilterChange}) {
     countries: [],
   });
     const handleCountryFilterChange = (selectedCountries) => {
-        console.log(selectedCountries);
         for (const [key, value] of Object.entries(selectedCountries)) {
           if (value) {
             setSelectedFilters((selectedFilters) => ({
@@ -24,7 +23,6 @@ function FilterContainer({onFilterChange}) {
         }
       };
       const handleParameterChange=(selectedParameters)=>{
-        console.log(selectedParameters)
         for (const [key, value] of Object.entries(selectedParameters)) {
           if (value) {
             setSelectedFilters((selectedFilters) => ({
@@ -36,7 +34,6 @@ function FilterContainer({onFilterChange}) {
         }
       };
       const handleExpertChange=(selectedExperts)=>{
-        console.log(selectedExperts)
         for (const [key, value] of Object.entries(selectedExperts)) {
           if (value) {
             setSelectedFilters((selectedFilters) => ({
